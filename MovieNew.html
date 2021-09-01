@@ -114,9 +114,13 @@ let data = await fetch(`http://www.omdbapi.com/?t=${name}&apikey=db9edb18`);
          let Actors= document.createElement('p');
         Actors.innerText="Actors: " +data1.Actors;
 
+        let Poster= document.createElement('img');
+        Poster.src=data1.Poster;
 
 
-		div.append(m_name,m_year,Rated,Released,RunTime,Actors);
+
+
+		div.append(Poster,m_name,m_year,Rated,Released,RunTime,Actors);
 		data_div.append(div);
 
 	}
