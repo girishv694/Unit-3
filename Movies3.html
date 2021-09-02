@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	body{
+		height: 100vh;
+		width: 100%;
+		background: linear-gradient(rgb(47,150,163),rgb(48,62,143));
+		color: #fff;
+	}
+
+	#box{
+		width: 500px;
+		margin: 0 auto;
+		padding: 10px;
+		text-align: center;
+	}
+	input{
+		width: 200px;
+		margin-bottom: 30px;
+		height: 30px;
+		outline: none;
+	}
+	button{
+		height: 30px;
+		width: 100px;
+		cursor: pointer;
+		margin-bottom: 50px;
+	}
+
+	#data{
+		display: flex;
+		gap: 20px;
+		flex-direction: row;
+	}
+	p{
+		display: flex;
+		gap: 20px;
+		margin-bottom: 30px;
+		font-size: 20px;
+	}
+	hr{
+		margin-bottom: 20px;
+	}
+	img{
+	width: 100px;
+	height: 100px;
+}
+ #tag{
+	border: 1px solid blue;
+	background-color: #eee;
+	color: #000;
+}
+
+		
+		
+	</style>
+</head>
+<body>
+	
+
+	<div id="box">
+		<input type="text" id="movie"/><br/>
+		<button onclick="search()">Search</button>
+		<hr/>
+		<div id="tag"></div>
+		<div id="data">
+			
+			
+		</div>
+		
+	</div>
+
+		
+
+
+
+</body>
+</html>
+<script>
+	
+	
+async function search(){
+	try{
+
+		//let data = await fetch("http://www.omdbapi.com/?i=tt3896198&apikey=db9edb18");
+		let name = document.getElementById("movie").value;
+		let data_insert = document.getElementById("data");
+
+
+
+let data = await fetch(`http://www.omdbapi.com/?t=${name}&apikey=db9edb18`);
+		let data1 = await data.json();
+		console.log(data1);
+
+		let data_div=document.getElementById("data")
+
+		let div = document.createElement('div');
+
+
+		let m_name = document.createElement('p');
+        m_name.innerText="Name: " +data1.Title;
+
+        let m_year = document.createElement('p');
+        m_year.innerText= "Year: " +data1.Year;
+
+         let Rated = document.createElement('p');
+        Rated.innerText="Rated: " +data1.Rated;
+
+
+         let Released = document.createElement('p');
+        Released.innerText="Released Year: " +data1.Released;
+
+        let RunTime= document.createElement('p');
+        RunTime.innerText="Running Time: "+data1.Runtime;
+
+
+         let Actors= document.createElement('p');
+        Actors.innerText="Actors: " +data1.Actors;
+
+        let Poster= document.createElement('img');
+        Poster.src=data1.Poster;
+        let Rating = data1.imdbRating;
+
+        console.log(Rating);
+
+        if(Rating>8.5){
+          var tag = document.getElementById("tag");
+
+          tag.innerText="Recommended";
+        }
+
+
+
+		div.append(Poster,m_name,m_year,Rated,Released,RunTime,Actors);
+		data_div.append(div);
+
+	}
+	catch(err){
+		console.log(err);
+	}
+}
+</script>
