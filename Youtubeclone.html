@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" href="Youtubeclone.css">
+	<script src="https://kit.fontawesome.com/c4e502dbf0.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="nav-bar">
+	<div class="toggle-btn">
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+	<img src="https://logos-world.net/wp-content/uploads/2020/04/YouTube-Logo.png" id="logo"/>
+	<div id="search-box">
+		<input type="text" placeholder="Search" id="name"/>
+		<i class="fas fa-search " id="search-icon" onclick="search()"></i>
+	</div>
+	<div id="icons">
+		<img src="https://static.thenounproject.com/png/1050700-200.png" id="imgg"/>
+
+	</div>
+
+
+</nav>
+
+
+<div id="side-bar">
+
+	<a href="#" class="links active"><img src="https://image.flaticon.com/icons/png/128/2/2144.png"/>Home</a>
+
+	<a href="#" class="links"><img src="https://icons-for-free.com/iconfiles/png/128/explore+24px-131985191584234929.png"/>Explore</a>
+
+	<a href="#" class="links"><img src="https://cdn.icon-icons.com/icons2/2248/PNG/512/youtube_subscription_icon_136007.png"/>Subscriptions</a>
+	<hr class="separators"/>
+
+	<a href="#" class="links"><img  src="https://cdn.icon-icons.com/icons2/1863/PNG/512/video-library_118500.png"/>Library</a>
+
+	<a href="#" class="links"><img class="links" src="https://cdn.icon-icons.com/icons2/933/PNG/512/history-clock-button_icon-icons.com_72701.png"/>History</a>
+	<a href="#" class="links"><img src=""/>Your videos</a>
+	<a href="#" class="links"><img src=""/>Watch later</a>
+	<a href="#" class="links"><img src=""/>Liked videos</a>
+	<a href="#" class="links"><img src=""/>Show more</a>
+	<hr class="separators"/>
+</div>
+
+<div class="filters">
+	<button class="filter-options active">All</button>
+	<button class="filter-options">CSS</button>
+	<button class="filter-options">Java Script</button>
+	<button class="filter-options">Full Stack</button>
+	<button class="filter-options">Java programming</button>
+	<button class="filter-options">All</button>
+	<button class="filter-options">CSS</button>
+	<button class="filter-options">Java Script</button>
+	<button class="filter-options">Full Stack</button>
+	<button class="filter-options">Java programming</button>
+	
+</div>
+
+
+<div class="video-container">
+	<!--<div class="video">
+		<img src="" class="thumbnail"/>
+		<div class="content">
+			<img src="" class="channel-icon"/>
+			<div class="info">
+				<h4 class="title">youtube is the only thing that makes us happy</h4>
+			</div>
+		</div>
+	</div>
+	
+</div>-->
+
+
+<div id="videos-div"></div>
+</div>
+
+
+
+</body>
+</html>
+<script>
+	 async function search(){
+		let name = document.getElementById("name").value;
+
+		let div = document.getElementById("videos-div");
+
+		let data = await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${name}&type=video&key=AIzaSyA-dclUNbZ8H8_LPX6XVTtxS2tnSlHws1U&maxResults=20`);
+
+
+        let data1 = await data.json();
+
+		console.log(data1.items);
+
+		for({id:{videoId},}
+			of data1.items){
+			//console.log(videoId);
+
+		let video_frame = document.createElement("iframe");
+		video_frame.src=`http://www.youtube.com/embed/${videoId}`;
+		video_frame.allow =`fullscreen`;
+		div.appendChild(video_frame);
+
+
+		}
+
+
+        
+
+	}
+</script>
