@@ -62,21 +62,14 @@
 
 
 <div class="video-container">
-	<!--<div class="video">
-		<img src="" class="thumbnail"/>
-		<div class="content">
-			<img src="" class="channel-icon"/>
-			<div class="info">
-				<h4 class="title">youtube is the only thing that makes us happy</h4>
-			</div>
+	<div id="video">
+		<div id="title">
 		</div>
+		
 	</div>
-	
-</div>-->
+	</div>
 
 
-<div id="videos-div"></div>
-</div>
 
 
 
@@ -86,23 +79,40 @@
 	 async function search(){
 		let name = document.getElementById("name").value;
 
-		let div = document.getElementById("videos-div");
+		
 
-		let data = await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${name}&type=video&key=AIzaSyA-dclUNbZ8H8_LPX6XVTtxS2tnSlHws1U&maxResults=20`);
+		let data = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${name}&type=video&key=AIzaSyA-dclUNbZ8H8_LPX6XVTtxS2tnSlHws1U&maxResults=4`);
 
 
         let data1 = await data.json();
 
 		console.log(data1.items);
 
-		for({id:{videoId},}
+		for({id:{videoId},
+	         snippet:{title},}
 			of data1.items){
 			//console.log(videoId);
+		console.log(title);
+		let div = document.querySelector('video-container')
 
 		let video_frame = document.createElement("iframe");
 		video_frame.src=`http://www.youtube.com/embed/${videoId}`;
 		video_frame.allow =`fullscreen`;
-		div.appendChild(video_frame);
+		div.append(video_frame);
+
+		let title1 = document.getElementById("title");
+		let tit = document.createElement('p');
+		tit.innerText =`${title}`
+
+		title1.appendChild(tit);
+
+
+
+
+		
+		
+
+		
 
 
 		}

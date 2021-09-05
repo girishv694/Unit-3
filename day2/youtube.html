@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script src="https://kit.fontawesome.com/c4e502dbf0.js" crossorigin="anonymous"></script>
+	<style>
+
+	body{
+		margin: 0;
+	}
+
+	input{
+		height: 30px;
+		margin-top: auto;
+		margin-bottom: auto;
+		width: 600px;
+		border: none;
+		outline: none;
+
+	}
+
+	iframe{
+		margin: 5px 5px;
+	}
+
+	#content{
+		margin-top: 10px;
+		display: grid;
+
+		grid-template-columns: 20% 75%;
+		grid-gap: 30px;
+	}
+	
+
+	#nav{
+		height: 60px;
+		
+		
+		display: flex;
+		color: white;
+		justify-content: space-between;
+
+
+	}
+	img{
+		margin-top: 10px;
+	}
+#inputt{
+	margin-top: 10px;
+}
+	
+   #top{
+   	display: flex;
+   	flex-direction: column;
+   	gap: 15px;
+   }
+
+   #home{
+   	width: 80%;
+   	background-color: #eee;
+   	height: 30px;
+   	margin-bottom: 20px;
+   }
+
+	#top a {
+		text-decoration: none;
+		font-family: sans-serif;
+		color: #000;
+		margin-left: 40px;
+
+	}
+
+	.back{
+		width: 80%;
+		background-color: #eee;
+		height: 25px;
+	}
+	hr{
+		width: 80%;
+		margin-left: 0;
+		border: 1px solid #eee;
+		margin-top: 10px;
+	}
+
+	#center a{
+		text-decoration: none;
+		color: black;
+		font-family: sans-serif;
+		margin-left: 40px;
+	}
+
+
+   #center{
+   	display: flex;
+   	flex-direction: column;
+   	gap: 15px;
+   	margin-top: 10px;
+   }
+   #inline{
+   	width: 100%;
+   }
+
+	button{
+		height: 35px;
+		margin-top: auto;
+		margin-bottom: auto;
+		outline: none;
+}
+
+	#icons{
+margin-top: 10px;
+
+		}
+		
+	</style>
+	
+
+</head>
+<body>
+	<div id="nav">
+		
+
+	<img src="https://i.pinimg.com/736x/cb/f6/4c/cbf64cc832d04af9933737151e268828.jpg"/>
+	<div id="inputt"><input type="text" id="name" placeholder="Search" />
+	<button onclick="search()">search</button></div>
+	<div id="icons">
+		<i class="fas fa-plus-square fa-2x"></i>
+		<i class="fas fa-plus-square "></i>
+		<i class="fas fa-plus-square "></i>
+	</div>
+</div>
+
+<div id="content">
+
+	<div id="left">
+	<div id="top">
+		<span class="back"><a href="#" id="home">HOME</a></span>
+		<a href="#">Explore</a>
+		<a href="#">Subscriptions</a>
+	</div>	
+	<div id="inline"></div>
+	<div id="center">
+		<a href="#">Library</a>
+		<a href="#">History</a>
+		<a href="#">Your videos</a>
+		<a href="#">Watch later</a>
+		<a href="#">Liked videos</a>
+
+		
+
+	</div>
+
+
+
+
+
+	</div>
+	
+
+
+
+
+
+	<div id="right">
+		<hr/>
+		
+		<div id="videos-div"></div>
+
+
+	</div>
+	
+</div>
+
+
+	
+</body>
+</html>
+
+<script>
+	
+
+	async function search(){
+		let name = document.getElementById("name").value;
+
+		let div = document.getElementById("videos-div");
+
+		let data = await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${name}&type=video&key=AIzaSyA-dclUNbZ8H8_LPX6XVTtxS2tnSlHws1U&maxResults=4`);
+
+
+        let data1 = await data.json();
+
+		console.log(data1.items);
+
+		for({id:{videoId},}
+			of data1.items){
+			//console.log(videoId);
+
+		let video_frame = document.createElement("iframe");
+		video_frame.src=`http://www.youtube.com/embed/${videoId}`;
+		video_frame.allow =`fullscreen`;
+		div.appendChild(video_frame);
+
+
+		}
+	}
+</script>

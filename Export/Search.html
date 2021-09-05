@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>app1</title>
+	<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/search.css">
+</head>
+<body>
+<div id="nav"></div>
+
+<div id="input-box">
+
+<input type="text" id="name" placeholder="Search your favorite food..."/>
+<button onclick="search()">search</button>
+
+</div>
+
+<div id="data">
+</div>
+
+</body>
+</html>
+
+<script type="module">
+
+import navbar from './components/Navbar.js';
+
+var nav = document.getElementById("nav");
+
+nav.innerHTML=navbar();
+</script>
+
+<script src="components/ShowSearch.js">
+	
+
+</script>
+

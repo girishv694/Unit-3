@@ -1,0 +1,37 @@
+#input-box{
+    height: 100px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap:10px;
+    margin-left: 30%;
+ 
+    
+}
+
+input{
+    width: 50%;
+    height: 20px;
+    align-items: center;
+    outline: none;
+    padding: 10px 10px;
+    font-size: 16px;
+}
+button{
+    width: 10%;
+    height: 45px;
+    outline: none;
+    background:#eee;
+    color:#000;
+    cursor: pointer;
+    font-size: 20px;
+    
+}
+
+#data{
+
+    height: calc(100% - 300px);
+    margin-top: 20px;
+   text-align: center;
+
+}

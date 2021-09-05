@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+	#data{
+		display:grid;
+		width: 80%;
+		gap:20px;
+		margin-top:50px;
+		grid-template-columns: repeat(4, 25%);
+		margin-left: auto;
+		margin-right: auto;
+
+	}
+
+	#data img{
+		width:200px;
+		height:200px;
+		border-radius:20px;
+	}
+	</style>
+</head>
+<body>
+	<input type="text" id="name"/>
+
+	<button onclick="search()"> click here</button>
+	<data id="data"></div>
+
+</body>
+</html>
+
+<script>
+async function search() {
+	const name = document.getElementById('name').value;
+const data = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${name}`)
+const data1 = await data.json()
+console.log(data1)
+
+
+if(data1.meals)
+data1.meals.forEach(meal => {
+ 
+ let div = document.getElementById('data');
+
+ let p = document.createElement('img')
+ p.src = `${meal.strMealThumb}`
+
+ let name = document.createElement('p');
+ name.innerText=`${meal.strMeal}`
+
+ div.append(p,name);
+
+	
+
+
+
+	
+})
+
+
+ }
+	
+
+</script>
+

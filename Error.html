@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+
+
+<input type="text" id="nam"/>
+<button on click="earch()">Search</button>
+</body>
+</html>
+<script>
+
+	async function search(url){
+		const baseurl = 'https://jsonplaceholder.typicode.com/';
+		const res = await fetch(baseurl+url);
+		const data = await res.json();
+
+		return data;
+	}
+
+	search('users').then(console.log)
+	
+
+
+</script>
