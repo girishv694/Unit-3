@@ -11,6 +11,7 @@ if(data1.meals){
 data1.meals.forEach(meal => {
  
  let div = document.getElementById('data');
+ let d = document.createElement('div');
 
  let p = document.createElement('img')
  p.src = `${meal.strMealThumb}`
@@ -18,7 +19,8 @@ data1.meals.forEach(meal => {
  let name = document.createElement('p');
  name.innerText=`${meal.strMeal}`
 
- div.append(p,name);
+ d.append(p,name);
+ div.append(d);
 
 	
 

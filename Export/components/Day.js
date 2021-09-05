@@ -13,6 +13,7 @@ async function abcd(){
 
 
             let div = document.getElementById('data');
+            let d = document.createElement('div');
 
  let p = document.createElement('img')
  p.src = `${meal.strMealThumb}`
@@ -20,7 +21,8 @@ async function abcd(){
  let name = document.createElement('p');
  name.innerText=`${meal.strMeal}`
 
- div.append(p,name);
+ d.append(p,name);
+ div.append(d);
         })
 }
 
