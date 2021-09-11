@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+<input type="text" id="name"/>
+<button onclick="search()">search</button>
+
+</body>
+</html>
+
+<script>
+
+	let name = document.getElementById('name').value;
+	async function search(){
+		let data = await fetch (`https://swapi.dev/api/people/?search=${name}`)
+
+		let data1 = await data.json()
+
+		console.log(data1.results);
+	}
+
+
+	</script>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+	.container{
+		width: 60%;
+		margin: 100px auto;
+		background: #333;
+		border-radius: 6px;
+		overflow: hidden;
+	}
+
+	.suggestions{
+		border-top: 2px solid #999;
+	}
+	.suggestions > div{
+		padding: 15px;
+		font-size: 20px;
+		color: #fff;
+		border-top: 1px solid #666;
+
+
+	}
+
+	.suggestions > div:hover{
+		background: #1e4dd4;
+		cursor: pointer;
+	}
+
+	.container input{
+		background: transparent;
+		border: 0;
+		font-size: 30px;
+		color: #fff;
+		outline: none;
+		padding: 5px 5px;
+		
+	}
+</style>
+</head>
+<body>
+		<div class="container">
+			<input type="text" id="name" placeholder="Search here" oninput="debounce(search,2000)"/>
+
+			<div class ="suggestions">
+				
+			</div>
+		</div>
+</body>
+</html>
+
+
+
+<script>
+
+ let div = document.querySelector('.suggestions');
+	async function searchMovies(name){
+
+		//let data = await fetch(`http://www.omdbapi.com/?s=${name}&apikey=db9edb18`)
+		let data = await fetch(`https://swapi.dev/api/people/?search=${name}`)
+		let data1 = await data.json();
+		return data1.results;
+	}
+
+	function appendMovies(m){
+	
+         
+		div.innerHTML="";
+		m.forEach(element => {
+
+			let inner_div = document.createElement('div')
+			let p = document.createElement('div')
+
+			p.innerText=`${element.name}`
+
+			div.append(p);
+
+			//inner_div.append(div);
+			p.onclik="al()";
+
+		})
+
+
+	}
+
+	
+
+	function al(){
+		alert("new")
+	}
+	
+
+
+
+	async function search(){
+
+		const name = document.getElementById('name').value;
+		if(name === ''){
+			div.innerHTML="";
+		}
+
+		if(name.length == 0){
+			return false
+		}
+
+		let movies = await searchMovies(name);
+
+		if(movies === undefined){
+			return false;
+		}
+
+		appendMovies(movies);
+		console.log(movies);
+		
+	}
+
+	function debounce(func,delay){
+
+		let name = document.getElementById('name').value;
+
+		if(name.length == 0){
+			return false;
+		}
+
+		if(timerId){
+			clearTimeout(timerId)
+		}
+		var timerId = setTimeout(()=>{
+			func();
+		},delay)
+	}
+
+	</script>

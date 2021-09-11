@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+	#main{
+		display:flex;
+		margin-top:100px;
+		gap: 20px;
+	
+		
+	}
+	#left{
+		
+		width: 250px;
+		height: 300px;
+		border: 1px solid blue;
+		margin-left: 400px;
+		padding: 5px 5px;
+		text-align: center;
+		background: #eee;
+	}
+	#right{
+	
+		width: 250px;
+		height: 300px;
+		border: 1px solid blue;
+		margin-right: 300px;
+		padding: 5px 5px;
+		text-align: center;
+		background: #eee;
+	}
+	
+	textarea{
+		width: 95%;
+		outline: none;
+		height: 40px;
+		height: 295px;
+		margin: 0;
+		background: transparent;
+		border: none;
+		font-size: 16px;
+		text-decoration: none;
+		padding-top: 5px;
+		font-family: sans-serif;
+
+	}
+	p{
+		font-family: sans-serif;
+		font-size: 16px;
+	}
+
+	h2{
+		text-align: center;
+
+	}
+	#head{
+		color:blue;
+	}
+
+	
+
+
+	</style>
+</head>
+<body>
+	<h2>Language Translator API</h2>
+<div id="main">
+	
+
+<div id="left">
+	<p id="head">Translate from</p>
+	<select id="lang">
+		<option value="en">English</option>
+		<option value="hi">hindi</option>
+		<option value="es">Spanish</option>
+		<option value="fr">French</option>
+		<option value="zh">Chinese</option>
+		<option value="de">German</option>
+		<option value="id">Indonesia</option>
+		<option value="ga">Irish</option>
+		<option value="it">Italian</option>
+		<option value="ja">Japanese</option>
+		<option value="ko">Korean</option>
+		<option value="pl">Polish</option>
+		<option value="ru">Russian</option>
+		<option value="tr">Turkish</option>
+		
+	</select>
+<textarea id="input" oninput="debounce(convert,1000)" ></textarea> 
+
+</div>
+
+<div id="right">
+	<p id="head">Translate into</p>
+	<select id="lang1">
+		<option value="hi">hindi</option>
+		<option value="es">Spanish</option>
+		<option value="fr">French</option>
+		<option value="zh">Chinese</option>
+		<option value="de">German</option>
+		<option value="id">Indonesia</option>
+		<option value="ga">Irish</option>
+		<option value="it">Italian</option>
+		<option value="ja">Japanese</option>
+		<option value="ko">Korean</option>
+		<option value="pl">Polish</option>
+		<option value="ru">Russian</option>
+		<option value="tr">Turkish</option>
+		<option value="en">English</option>
+
+	</select>
+<p id="text"></p>
+</div>
+
+</div>
+
+</body>
+</html>
+<script>
+
+function convert(){
+
+	let data = {
+		q:document.getElementById('input').value,
+		source:document.getElementById('lang').value,
+		target:document.getElementById('lang1').value,
+	};
+
+	data = JSON.stringify(data);
+
+	fetch("https://libretranslate.de/translate",{
+		method:"POST",
+		body:data,
+		headers :{
+			"Content-Type":"application/json",
+		}
+	})
+
+	.then((res)=>{
+		return res.json();
+	})
+	.then((res)=>{
+		console.log(res);
+		var abc = document.getElementById("text");
+		abc.innerText = `${res.translatedText}`
+		var input = document.getElementById('input').value;
+
+		if(input===''){
+			abc.innerText="";
+		}
+		
+	})
+
+	.catch((err)=>{
+		console.log(err);
+	});
+
+
+
+}
+
+
+
+
+
+
+
+function debounce(func,delay){
+
+		let name = document.getElementById('input').value;
+
+		if(name.length == 0){
+			return false;
+		}
+
+		if(timerId){
+			clearTimeout(timerId)
+		}
+		var timerId = setTimeout(()=>{
+			func();
+		},delay)
+	}
+
+
+
+	
+
+</script>
